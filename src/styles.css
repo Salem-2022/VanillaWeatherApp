@@ -1,0 +1,71 @@
+body {
+  font-family: "PT Mono", monospace;
+}
+
+form {
+  width: -webkit-fill-available;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+img {
+  position: relative;
+  vertical-align: text-bottom;
+}
+
+p {
+  padding-top: 5px;
+  font-size: small;
+}
+
+.container {
+  width: 50%;
+}
+
+.card {
+  border-radius: 10px;
+  border: 1px solid rgb(0, 162, 255);
+  background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+}
+
+.card-body {
+  width: 80%;
+  margin: 0 auto;
+  border: 1px solid rgba(133, 132, 132, 0.349);
+  border-radius: 4px;
+}
+
+.currentWeather {
+  text-align: left;
+  margin-top: 30px;
+  margin-left: 70px;
+}
+
+.currentCity {
+  font-size: 25px;
+}
+.currentDay {
+  font-size: 18px;
+}
+
+#currentTemp {
+  font-size: 45px;
+  font-weight: 900px;
+  vertical-align: text-bottom;
+  position: relative;
+}
+
+.extraWeatherInfo {
+  margin-top: 120px;
+  margin-left: 50px;
+}
+#searchButton {
+  width: 100px;
+}
+#units {
+  position: absolute;
+  font-size: x-large;
+}
