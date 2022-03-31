@@ -69,3 +69,17 @@ p {
   position: absolute;
   font-size: x-large;
 }
+.forcast {
+  padding-top: 30px;
+  text-align: left;
+  font-size: 20px;
+  line-height: 1.2;
+}
+#sat {
+  text-align: center;
+  margin-top: 0 auto;
+  margin-left: 70px;
+}
+li.satEmoji {
+  font-size: 60px;
+}
