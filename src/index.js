@@ -29,6 +29,25 @@ function search(event) {
   let apiKeyfirst = "7be7b75afb254afdb582a59c09762d2d";
   let apiUrlfirst = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&units=metric`;
 
+  function showForecast() {
+    let forecastElement = document.querySelector("#forecast");
+    let forecast = `<div class="row">`;
+    let dayNames = ["Sun", "Mon", "Tue"];
+    dayNames.forEach(function (day) {
+      forecast =
+        forecast +
+        `<div class="col-2">
+              <ul>
+              <li class="sat">${day}</li>
+              <li class="emoji">🌤</li>
+              <li class="satTemperature"> <span id="minTemp">10℃</span> <span id="maxTemp">17℃</span></li>
+            </ul>
+            </div>`;
+    });
+    forecast = forecast + `</div>`;
+    forecastElement.innerHTML = forecast;
+  }
+  showForecast();
   function showTemp(response) {
     let iconCurrent = document.querySelector("#currentIcon");
     let temp = Math.round(response.data.main.temp);
