@@ -14,7 +14,7 @@ ul {
 img {
   position: relative;
   vertical-align: text-bottom;
-  width: 60px;
+  width: 80px;
 }
 
 p {
@@ -53,7 +53,7 @@ p {
 }
 
 #currentTemp {
-  font-size: 40px;
+  font-size: 50px;
   font-weight: 900px;
   vertical-align: text-bottom;
   position: relative;
@@ -78,9 +78,6 @@ p {
   margin-left: 70px;
 }
 
-li.emoji {
-  font-size: 60px;
-}
 #minTemp {
   font-size: medium;
 }
