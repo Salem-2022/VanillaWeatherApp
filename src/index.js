@@ -85,7 +85,11 @@ function showForecast() {
       `<div class="col-2">
               <ul>
               <li class="sat">${day}</li>
-              <li class="emoji">🌤</li>
+              <li class="emoji"><img
+                  src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
+                  alt="clear"
+                  id="forecastIcon"
+                /></li>
               <li class="satTemperature"> <span id="minTemp">10℃</span> <span id="maxTemp">17℃</span></li>
             </ul>
             </div>`;
