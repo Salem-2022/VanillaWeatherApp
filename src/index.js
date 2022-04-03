@@ -87,8 +87,8 @@ function currentCity(response) {
   );
   iconCurrent.setAttribute("alt", response.data.weather[0].description);
   tempValue.innerHTML = `${temp}`;
-  humidity.innerHTML = `Humidity: ${response.data.main.humidity} %`;
-  windSpeed.innerHTML = `Wind: ${response.data.wind.speed} m/s`;
+  humidity.innerHTML = `Humidity: ${Math.round(response.data.main.humidity)} %`;
+  windSpeed.innerHTML = `Wind: ${Math.round(response.data.wind.speed)} m/s`;
   description.innerHTML = response.data.weather[0].description;
   getCurrentCoordinates(response.data.coord);
 }
@@ -121,30 +121,11 @@ function search(event) {
     );
     iconCurrent.setAttribute("alt", response.data.weather[0].description);
     tempValue.innerHTML = `${temp}`;
-    humidity.innerHTML = `Humidity: ${response.data.main.humidity} %`;
-    windSpeed.innerHTML = `Wind: ${response.data.wind.speed} m/s`;
+    humidity.innerHTML = `Humidity: ${Math.round(
+      response.data.main.humidity
+    )} %`;
+    windSpeed.innerHTML = `Wind: ${Math.round(response.data.wind.speed)} m/s`;
     description.innerHTML = response.data.weather[0].description;
-    //deg F and C
-    function showTempC(event) {
-      event.preventDefault();
-      let currentTempC = document.querySelector("#currentTemp");
-      currentTempC.innerHTML = `${temp}`;
-    }
-
-    let degreeCent = document.querySelector("#degC");
-    degreeCent.addEventListener("click", showTempC);
-
-    function showTempF(event) {
-      event.preventDefault();
-      let currentTempF = document.querySelector("#currentTemp");
-      let tempC = `${temp}`;
-      currentTempF.innerHTML = Math.round((tempC * 9) / 5 + 32);
-    }
-
-    let degreeFaren = document.querySelector("#degF");
-    degreeFaren.addEventListener("click", showTempF);
-
-    //=======
 
     getCoordinates(response.data.coord);
   }
