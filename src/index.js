@@ -63,7 +63,41 @@ function getCoordinates(coordinates) {
   console.log(apiUrlOneCall);
   axios.get(`${apiUrlOneCall}`).then(showForecast);
 }
+//---
+function getCurrentCoordinates(coords) {
+  let apiKeyThird = "7be7b75afb254afdb582a59c09762d2d";
+  let apiUrlCurrentForecast = `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lon}&appid=${apiKeyThird}&units=metric`;
+  console.log(apiUrlCurrentForecast);
+  axios.get(`${apiUrlCurrentForecast}`).then(showForecast);
+}
+function currentCity(response) {
+  let CurrentCity = document.querySelector("li.currentCity");
+  CurrentCity.innerHTML = response.data.name;
+  console.log(response.data);
+  let iconCurrent = document.querySelector("#currentIcon");
+  let temp = Math.round(response.data.main.temp);
+  let tempValue = document.querySelector("#currentTemp");
+  let humidity = document.querySelector("#humidity");
+  let windSpeed = document.querySelector("#windSpeed");
+  let description = document.querySelector("#description");
 
+  iconCurrent.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconCurrent.setAttribute("alt", response.data.weather[0].description);
+  tempValue.innerHTML = `${temp}`;
+  humidity.innerHTML = `Humidity: ${response.data.main.humidity} %`;
+  windSpeed.innerHTML = `Wind: ${response.data.wind.speed} m/s`;
+  description.innerHTML = response.data.weather[0].description;
+  getCurrentCoordinates(response.data.coord);
+}
+let apiKeyCurrent = "7be7b75afb254afdb582a59c09762d2d";
+let apiUrlCurrent = `https://api.openweathermap.org/data/2.5/weather?q=stockholm&units=metric`;
+
+axios.get(`${apiUrlCurrent}&appid=${apiKeyCurrent}`).then(currentCity);
+
+//---
 function search(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-text-input");
