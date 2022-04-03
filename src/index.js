@@ -20,6 +20,50 @@ if (minutes < 10) {
 }
 currentTime.innerHTML = `${day} ${hours}:${minutes}`;
 
+function formatDay(dateStamp) {
+  let date = new Date(dateStamp * 1000);
+  let day = date.getDay();
+  let dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return dayNames[day];
+}
+function showForecast(response) {
+  let weatherForecast = response.data.daily;
+  let forecastElement = document.querySelector("#forecast");
+  let forecast = `<div class="row">`;
+
+  weatherForecast.forEach(function (forecastDay, index) {
+    if (index < 5) {
+      forecast =
+        forecast +
+        `<div class="col-2">
+              <ul>
+              <li class="sat">${formatDay(forecastDay.dt)}</li>
+              <li class="emoji"><img
+                  src=" http://openweathermap.org/img/wn/${
+                    forecastDay.weather[0].icon
+                  }@2x.png"
+                  alt="clear"
+                  id="forecastIcon"
+                /></li>
+              <li class="forecastTemp"> <span id="minTemp">${Math.round(
+                forecastDay.temp.min
+              )}℃</span> <span id="maxTemp">${Math.round(
+          forecastDay.temp.max
+        )}℃</span></li>
+            </ul>
+            </div>`;
+    }
+  });
+  forecast = forecast + `</div>`;
+  forecastElement.innerHTML = forecast;
+}
+function getCoordinates(coordinates) {
+  let apiKeySecond = "7be7b75afb254afdb582a59c09762d2d";
+  let apiUrlOneCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKeySecond}&units=metric`;
+  console.log(apiUrlOneCall);
+  axios.get(`${apiUrlOneCall}`).then(showForecast);
+}
+
 function search(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-text-input");
@@ -67,6 +111,8 @@ function search(event) {
     degreeFaren.addEventListener("click", showTempF);
 
     //=======
+
+    getCoordinates(response.data.coord);
   }
 
   axios.get(`${apiUrlfirst}&appid=${apiKeyfirst}`).then(showTemp);
@@ -74,27 +120,3 @@ function search(event) {
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", search);
-
-function showForecast() {
-  let forecastElement = document.querySelector("#forecast");
-  let forecast = `<div class="row">`;
-  let dayNames = ["Sun", "Mon", "Tue"];
-  dayNames.forEach(function (day) {
-    forecast =
-      forecast +
-      `<div class="col-2">
-              <ul>
-              <li class="sat">${day}</li>
-              <li class="emoji"><img
-                  src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
-                  alt="clear"
-                  id="forecastIcon"
-                /></li>
-              <li class="satTemperature"> <span id="minTemp">10℃</span> <span id="maxTemp">17℃</span></li>
-            </ul>
-            </div>`;
-  });
-  forecast = forecast + `</div>`;
-  forecastElement.innerHTML = forecast;
-}
-showForecast();
