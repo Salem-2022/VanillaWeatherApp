@@ -63,20 +63,20 @@ function showForecast(response) {
 function getCoordinates(coordinates) {
   let apiKeySecond = "7be7b75afb254afdb582a59c09762d2d";
   let apiUrlOneCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKeySecond}&units=metric`;
-  console.log(apiUrlOneCall);
+
   axios.get(`${apiUrlOneCall}`).then(showForecast);
 }
 //---
 function getCurrentCoordinates(coords) {
   let apiKeyThird = "7be7b75afb254afdb582a59c09762d2d";
   let apiUrlCurrentForecast = `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lon}&appid=${apiKeyThird}&units=metric`;
-  console.log(apiUrlCurrentForecast);
+
   axios.get(`${apiUrlCurrentForecast}`).then(showForecast);
 }
 function currentCity(response) {
   let CurrentCity = document.querySelector("li.currentCity");
   CurrentCity.innerHTML = response.data.name;
-  console.log(response.data);
+
   let iconCurrent = document.querySelector("#currentIcon");
   let temp = Math.round(response.data.main.temp);
   let tempValue = document.querySelector("#currentTemp");
