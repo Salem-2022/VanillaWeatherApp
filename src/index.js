@@ -1,24 +1,27 @@
-let now = new Date();
-let currentTime = document.querySelector("li.currentDay");
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wedensday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-let day = days[now.getDay()];
-let hours = now.getHours();
-if (hours < 10) {
-  hours = `0${hours}`;
+function formatTime(timestamp) {
+  let now = new Date(timestamp);
+  //let currentTime = document.querySelector("li.currentDay");
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wedensday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let day = days[now.getDay()];
+  let hours = now.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = now.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  return `${day} ${hours}:${minutes}`;
 }
-let minutes = now.getMinutes();
-if (minutes < 10) {
-  minutes = `0${minutes}`;
-}
-currentTime.innerHTML = `${day} ${hours}:${minutes}`;
+//currentTime.innerHTML = `${day} ${hours}:${minutes}`;
 
 function formatDay(dateStamp) {
   let date = new Date(dateStamp * 1000);
@@ -77,6 +80,7 @@ function currentCity(response) {
   let iconCurrent = document.querySelector("#currentIcon");
   let temp = Math.round(response.data.main.temp);
   let tempValue = document.querySelector("#currentTemp");
+  let currentTime = document.querySelector("li.currentDay");
   let humidity = document.querySelector("#humidity");
   let windSpeed = document.querySelector("#windSpeed");
   let description = document.querySelector("#description");
@@ -87,6 +91,8 @@ function currentCity(response) {
   );
   iconCurrent.setAttribute("alt", response.data.weather[0].description);
   tempValue.innerHTML = `${temp}`;
+  currentTime.innerHTML = formatTime(response.data.dt * 1000);
+
   humidity.innerHTML = `Humidity: ${Math.round(response.data.main.humidity)} %`;
   windSpeed.innerHTML = `Wind: ${Math.round(response.data.wind.speed)} m/s`;
   description.innerHTML = response.data.weather[0].description;
@@ -111,6 +117,7 @@ function search(event) {
     let iconCurrent = document.querySelector("#currentIcon");
     let temp = Math.round(response.data.main.temp);
     let tempValue = document.querySelector("#currentTemp");
+    let currentTime = document.querySelector("li.currentDay");
     let humidity = document.querySelector("#humidity");
     let windSpeed = document.querySelector("#windSpeed");
     let description = document.querySelector("#description");
@@ -128,6 +135,7 @@ function search(event) {
     description.innerHTML = response.data.weather[0].description;
 
     getCoordinates(response.data.coord);
+    currentTime.innerHTML = formatTime(response.data.dt * 1000);
   }
 
   axios.get(`${apiUrlfirst}&appid=${apiKeyfirst}`).then(showTemp);
